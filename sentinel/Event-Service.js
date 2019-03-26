@@ -1,7 +1,7 @@
 Web3 = require('web3')
 conf= require('./resources/config')
 
-web3 = new Web3(new Web3.providers.HttpProvider('http://192.168.0.11:4000'));
+web3 = new Web3(new Web3.providers.HttpProvider('http://192.168.0.25:4000'));
 web3.eth.defaultAccount= web3.eth.accounts[0];
 const ECC =new  web3.eth.Contract(conf.EC.abi,conf.EC.address);
 
@@ -21,7 +21,7 @@ addEvent=function(event){
     stringEvent+=event.timestamp+"$"+event.data+"#"
     console.log(stringEvent)
     if (lengthEvents === threshold) {
-        ECC.methods.createEvent(Date.now(),stringEvent).send({from: '0xe9c86e3422248980dae41e2524326c85b5466fa2',gas:300000})
+        ECC.methods.createEvent(Date.now(),stringEvent).send({from:'e9c86e3422248980dae41e2524326c85b5466fa2',gas:300000})
         .then((result) => {
             console.log(result)
         })

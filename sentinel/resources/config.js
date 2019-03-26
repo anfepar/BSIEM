@@ -1,5 +1,5 @@
 exports.EC={
-	"address":"0xa0b3aba30946a3ad4dc4bbf3bc910805bfc36893",
+	"address":"0x6e4db947953ab7f61c454b44fa17f6848ae56e5d",
 	"abi":[
 		{
 			"constant": false,

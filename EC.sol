@@ -4,8 +4,9 @@ pragma solidity ^0.4.25;
 **/
 
 contract EC {
+    enum EventType {Event,Alarm}
     
-    event newEventCreated(uint256 timestamp,string _data);
+    event newEventCreated(uint256 timestamp,string _data,EventType event_type);
     
     //mapa con los eventos almacenados por dirección del nodo
     mapping(address => mapping(uint256 => Event))public  events;
@@ -19,6 +20,7 @@ contract EC {
         uint256 timestamp;
         //descripción del evento de seguridad
         string data;
+        EventType event_type;
     }
     //constructor donde se define el limite de eventos que se pueden almancenar
     constructor(uint256 _threshold) public { 
@@ -26,14 +28,14 @@ contract EC {
     }
 
     // Create a new Event.
-    function createEvent(uint256 timestamp,string _data) public {
+    function createEvent(uint256 timestamp,string _data,EventType _event_type) public {
         uint256 id_count;
         id_count=identifiers[msg.sender]+=1;
         //si el limite es alcanzado se sobreescribre sobre el mapa
         if(id_count==threshold)
             id_count=1;
-        events[msg.sender][id_count]=Event(timestamp,_data);
-        emit newEventCreated(timestamp,_data);
+        events[msg.sender][id_count]=Event(timestamp,_data,_event_type);
+        emit newEventCreated(timestamp,_data,_event_type);
     }
     
     function setThreshold(uint256 _threshold){
@@ -41,4 +43,3 @@ contract EC {
     }
 
 }
-

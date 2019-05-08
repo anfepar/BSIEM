@@ -1,5 +1,5 @@
 exports.EC={
-	"address":"0x6e4db947953ab7f61c454b44fa17f6848ae56e5d",
+	"address":"0x71ecc8a82ac6926e6340d68706471353b095ebf3",
 	"abi":[
 		{
 			"constant": false,
@@ -11,6 +11,10 @@ exports.EC={
 				{
 					"name": "_data",
 					"type": "string"
+				},
+				{
+					"name": "_event_type",
+					"type": "uint8"
 				}
 			],
 			"name": "createEvent",
@@ -18,6 +22,28 @@ exports.EC={
 			"payable": false,
 			"stateMutability": "nonpayable",
 			"type": "function"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"name": "timestamp",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"name": "_data",
+					"type": "string"
+				},
+				{
+					"indexed": false,
+					"name": "event_type",
+					"type": "uint8"
+				}
+			],
+			"name": "newEventCreated",
+			"type": "event"
 		},
 		{
 			"constant": false,
@@ -45,23 +71,6 @@ exports.EC={
 			"type": "constructor"
 		},
 		{
-			"anonymous": false,
-			"inputs": [
-				{
-					"indexed": false,
-					"name": "timestamp",
-					"type": "uint256"
-				},
-				{
-					"indexed": false,
-					"name": "_data",
-					"type": "string"
-				}
-			],
-			"name": "newEventCreated",
-			"type": "event"
-		},
-		{
 			"constant": true,
 			"inputs": [
 				{
@@ -82,6 +91,10 @@ exports.EC={
 				{
 					"name": "data",
 					"type": "string"
+				},
+				{
+					"name": "event_type",
+					"type": "uint8"
 				}
 			],
 			"payable": false,

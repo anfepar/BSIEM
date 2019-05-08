@@ -1,5 +1,5 @@
 var Web3 = require('web3')
-var fs = require('fs'); 
+var fs = require('fs');
 conf= require('./resources/config')
 
 web3 = new Web3(new Web3.providers.WebsocketProvider('ws://192.168.0.18:4001'));
@@ -7,7 +7,6 @@ web3.eth.defaultAccount= web3.eth.accounts[0];
 const ECC =new  web3.eth.Contract(conf.EC.abi,conf.EC.address);
 
 ECC.events.newEventCreated({ fromBlock: 'latest' },(err,event)=>{
-    
     console.log(event);
 })
 .on('data', (event) => {
@@ -36,5 +35,5 @@ var writeFile = function(line){
             return console.log(err);
         }
         console.log("The file was saved!");
-    }); 
+    });
 }

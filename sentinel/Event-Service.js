@@ -1,7 +1,7 @@
 Web3 = require('web3')
 conf= require('./resources/config')
 
-web3 = new Web3(new Web3.providers.HttpProvider('http://192.168.0.25:4000'));
+web3 = new Web3(new Web3.providers.HttpProvider('http://192.168.0.14:4001'));
 web3.eth.defaultAccount= web3.eth.accounts[0];
 const ECC =new  web3.eth.Contract(conf.EC.abi,conf.EC.address);
 
@@ -16,24 +16,29 @@ var lengthEvents=0;
 var threshold=5;
 var stringEvent="";
 
-addEvent=function(event){
+addEvent=async function(event){
     lengthEvents++;
     stringEvent+=event.timestamp+"$"+event.data+"#"
     console.log(stringEvent)
     if (lengthEvents === threshold) {
-        ECC.methods.createEvent(Date.now(),stringEvent).send({from:'e9c86e3422248980dae41e2524326c85b5466fa2',gas:300000})
+        await ECC.methods.createEvent(Date.now(),stringEvent,0).send({from:'86cade96d8631bf9f1ead5e870ff9d0527dc25a3',gas:300000})
         .then((result) => {
             console.log(result)
         })
         .catch((error)=>
             console.log(error)
         )
-        string=""
+        stringEvent="";
+        lengthEvents=0;
     }
 }
 
-addEvent({timestamp:Date.now(),data:"DOS Attack"})
-addEvent({timestamp:Date.now(),data:"Untrustable ping"})
-addEvent({timestamp:Date.now(),data:"SOME ELSE"})
-addEvent({timestamp:Date.now(),data:"SOME ELSE"})
-addEvent({timestamp:Date.now(),data:"SOME EVENT"})
+sendEvents= async function(cantEevents){
+    for(var i=0;i<cantEevents;i++){
+        await addEvent({timestamp:Date.now(),data:"transport tcp"})
+        console.log("variable i",i)
+    }
+}
+
+
+sendEvents(10);

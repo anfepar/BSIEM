@@ -19,7 +19,6 @@ var stringEvent="";
 addEvent=async function(event){
     lengthEvents++;
     stringEvent+=event.timestamp+"$"+event.data+"#"
-    console.log(stringEvent)
     if (lengthEvents === threshold) {
         await ECC.methods.createEvent(Date.now(),stringEvent,0).send({from:'86cade96d8631bf9f1ead5e870ff9d0527dc25a3',gas:300000})
         .then((result) => {
@@ -36,7 +35,7 @@ addEvent=async function(event){
 sendEvents= async function(cantEevents){
     for(var i=0;i<cantEevents;i++){
         await addEvent({timestamp:Date.now(),data:"transport tcp"})
-        console.log("variable i",i)
+        console.log("variable i + timestamp",i,Date.now())
     }
 }
 

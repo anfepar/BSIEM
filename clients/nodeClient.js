@@ -10,8 +10,9 @@ web3 = new Web3(new Web3.providers.WebsocketProvider('ws://192.168.0.11:4002'));
 web3.eth.defaultAccount= web3.eth.accounts[0];
 
 web3.eth.subscribe('newBlockHeaders',{ address:conf.EC.address},(err,event)=>{
-    
-    //console.log(event);
+    entries.push(event);
+    console.log(event); // same results as the optional callback above
+    toExcel(entries);
 })
 .on('data', (event) => {
     count++;
@@ -20,7 +21,7 @@ web3.eth.subscribe('newBlockHeaders',{ address:conf.EC.address},(err,event)=>{
     toExcel(entries);
     console.log("excel saved")
 })
-.on('chaned', (event) => {
+.on('changed', (event) => {
     // remove event from local database
 })
 .on('error', console.error);

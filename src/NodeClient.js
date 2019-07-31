@@ -2,7 +2,7 @@ var Web3 = require('web3')
 var fs = require('fs'); 
 var XLSX = require('xlsx');
 
-conf= require('./resources/config')
+conf= require('./variables/config')
 var count=0;
 var entries_limit=20;
 var entries=[]

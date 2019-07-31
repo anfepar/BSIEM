@@ -1,6 +1,6 @@
 var Web3 = require('web3')
 var fs = require('fs');
-conf= require('./resources/config')
+conf= require('./variables/config')
 
 web3 = new Web3(new Web3.providers.WebsocketProvider('ws://192.168.0.11:4002'));
 web3.eth.defaultAccount= web3.eth.accounts[0];

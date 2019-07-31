@@ -1,7 +1,7 @@
 
 
 Web3 = require('web3')
-conf= require('./resources/config')
+conf= require('./variables/config')
 
 web3 = new Web3(new Web3.providers.HttpProvider('http://192.168.0.25:4000'));
 web3.eth.defaultAccount= web3.eth.accounts[0];
